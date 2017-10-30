@@ -1,10 +1,15 @@
 package cn.bupt.util;
 
+import net.sf.json.JSON;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 /*
@@ -59,12 +64,23 @@ public class RestfulClient {
             while (null != (line = reader.readLine())) {
                 buffer.append(line);
             }
-
-
-
-            System.out.println(buffer.toString());
-
             connection.disconnect();
+
+            JSONObject obj = JSONObject.fromObject(buffer.toString());
+
+            Iterator iter = obj.keys();
+            while (iter.hasNext()) {
+                Object key = iter.next();
+                System.out.println((String) key + ": " + obj.get(key));
+            }
+
+            JSONArray data = (JSONArray) obj.get("DS");
+            for (int i = 0; i < data.size(); ++i) {
+                JSONObject record = (JSONObject) data.get(i);
+
+                System.out.println(data.get(i));
+            }
+
         }
         catch (Exception ex) {
             ex.printStackTrace();
