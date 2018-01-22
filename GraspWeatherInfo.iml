@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="httpclient" level="project" />
     <orderEntry type="library" name="json-lib" level="project" />
+    <orderEntry type="library" name="poi" level="project" />
   </component>
 </module>
